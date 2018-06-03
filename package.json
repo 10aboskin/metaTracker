@@ -1,0 +1,21 @@
+{
+  "name": "metatracker",
+  "version": "1.0.0",
+  "description": "tracks the current hots meta",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon .",
+    "test": "test"
+  },
+  "author": "Andrew Boskin",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "cheerio-tableparser": "^1.0.1",
+    "express": "^4.16.3",
+    "nodemon": "^1.17.5",
+    "pug": "^2.0.3",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
+  }
+}
