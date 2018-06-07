@@ -1,7 +1,7 @@
 const express = require('express'),
       router = express.Router(),
-      getData = require('../middleware/getData'),
-      renderLists = require('../middleware/renderLists')
+      getData = require('../middlewares/getData'),
+      renderLists = require('../middlewares/renderLists')
 
 router.get('/', getData, renderLists)
 

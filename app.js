@@ -1,6 +1,9 @@
+const logger = require('morgan')
+
 const express = require('express'), app = express()
 
 app.set('view engine', 'pug')
+app.use(logger('dev'))
 app.use(require('./controllers'))
 
-app.listen(8080, () => console.log('listening on port 8080...'))
+module.exports = app
