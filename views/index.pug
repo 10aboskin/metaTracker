@@ -1,6 +1,6 @@
 head
   style(type="text/css")
-    include ../stylesheets/index.css
+    include ../public/stylesheets/index.css
   link(href="https://fonts.googleapis.com/css?family=Open+Sans|Sunflower:300" rel="stylesheet")
 body
   //- TODO: use for loop to generate lists
@@ -15,8 +15,8 @@ body
           li.hero
             div.hero-image
             div.hero-info
-              h3= hero.name
-              div= hero.role
+              h4= hero.name
+              p= hero.role
             div.meta-score.center-contents= hero.metaScore
     div.top-eight-assassin
       div.center-contents
@@ -26,8 +26,8 @@ body
           li.hero
             div.hero-image
             div.hero-info
-              h3= hero.name
-              div= hero.role
+              h4= hero.name
+              p= hero.role
             div.meta-score.center-contents= hero.metaScore
     div.top-eight-warrior
       div.center-contents
@@ -37,8 +37,8 @@ body
           li.hero
             div.hero-image
             div.hero-info
-              h3= hero.name
-              div= hero.role
+              h4= hero.name
+              p= hero.role
             div.meta-score.center-contents= hero.metaScore
     div.top-eight-support
       div.center-contents
@@ -48,8 +48,8 @@ body
           li.hero
             div.hero-image
             div.hero-info
-              h3= hero.name
-              div= hero.role
+              h4= hero.name
+              p= hero.role
             div.meta-score.center-contents= hero.metaScore
     div.top-eight-specialist
       div.center-contents
@@ -59,9 +59,9 @@ body
           li.hero
             div.hero-image
             div.hero-info
-              h3= hero.name
-              div= hero.role
+              h4= hero.name
+              p= hero.role
             div.meta-score.center-contents= hero.metaScore
 
 script
-  include ../js/index.js
+  include ../public/js/index.js

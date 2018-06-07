@@ -1,12 +1,6 @@
-const express = require('express')
+const express = require('express'), app = express()
 
-const getData = require('./getData')
-const renderLists = require('./renderLists')
-
-const app = express()
 app.set('view engine', 'pug')
-app.use(getData)
-app.use(renderLists)
-app.get('/')
+app.use(require('./controllers'))
 
 app.listen(8080, () => console.log('listening on port 8080...'))

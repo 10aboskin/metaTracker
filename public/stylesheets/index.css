@@ -1,14 +1,15 @@
 :root {
   --base-color: #083596;
-  --base-compliment: #ba0062;
   --base-light: #2f60c8;
   --base-dark: #03205D;
+  --compliment-color: #ba0062;
+  --compliment-dark: #71003C;
   --text-light: #cccdfd;
   --text-dark: #7a7cca;
   --score-lightness: 0%;
   --score-blur: 0px;
 
-  background: linear-gradient(315deg, var(--base-dark), var(--base-compliment));
+  background: linear-gradient(315deg, var(--base-dark), var(--compliment-dark));
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
 }
@@ -20,25 +21,30 @@
 .lists-grid {
   display: grid;
   grid-template: 1fr / 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 8px;
+  grid-gap: 4px;
+  margin: 0 16px;
 }
 .page-title {
-  height: 40px;
+  margin-top: 16px;
 }
 .center-contents {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, p {
   text-transform: uppercase;
-  font-family: 'Sunflower';
+  font-family: 'Open Sans';
   color: var(--text-light);
   margin: 0;
 }
-h3 {
+h4 {
   margin-right: 8px;
   display: inline-block;
+}
+p {
+  color: var(--text-dark);
+  font-size: 12px;
 }
 ul {
   list-style: none;
@@ -69,8 +75,8 @@ li {
   color: var(--text-dark);
 }
 .meta-score {
-  font-family: 'Sunflower';
-  background-color: var(--base-compliment);
+  font-family: 'Open Sans';
+  background-color: var(--compliment-color);
   color: var(--text-light);
   margin: auto 8px auto auto;
   width: 40px;
@@ -80,15 +86,15 @@ li {
 }
 @keyframes pulse {
   0% {
-    box-shadow: 0px 0px 0px 0px var(--base-compliment);
+    box-shadow: 0px 0px 0px 0px var(--compliment-color);
     text-shadow: 0px 0px var(--score-blur) var(--text-light);
   }
   50% {
-    box-shadow: 0px 0px 0px 0px var(--base-compliment);
+    box-shadow: 0px 0px 0px 0px var(--compliment-color);
     text-shadow: 0px 0px calc(var(--score-blur) * 4) var(--text-light);
   }
   100% {
-    box-shadow: 0px 0px 0px 0px var(--base-compliment);
+    box-shadow: 0px 0px 0px 0px var(--compliment-color);
     text-shadow: 0px 0px var(--score-blur) var(--text-light);
   }
 }

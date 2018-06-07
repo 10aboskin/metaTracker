@@ -2,7 +2,7 @@ const rp = require('request-promise')
 const cheerio = require('cheerio')
 const cheerioTableparser = require('cheerio-tableparser')
 
-const heroRoles = require('./heroRoles')
+const heroRoles = require('../helpers/heroRoles')
 
 const requestOptions = {
   uri: `https://www.hotslogs.com/Default`,
@@ -37,7 +37,8 @@ const getData = (req, res, next) => {
       next()
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err)
+      next()
     });
 }
 
