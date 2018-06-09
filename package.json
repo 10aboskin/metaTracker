@@ -4,7 +4,7 @@
   "description": "tracks the current hots meta",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "nodemon --inspect ./bin/www",
     "test": "test"
   },
   "author": "Andrew Boskin",
