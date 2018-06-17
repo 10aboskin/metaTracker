@@ -8,7 +8,6 @@
   --text-dark: #7a7cca;
   --score-lightness: 0%;
   --score-blur: 0px;
-
   background: linear-gradient(315deg, var(--base-dark), var(--compliment-dark));
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;

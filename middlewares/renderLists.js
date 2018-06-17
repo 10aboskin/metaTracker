@@ -1,11 +1,14 @@
 const renderLists = (req, res) => {
   const heroObjects = req.heroObjects
   const heroRoles = [ '', 'Assassin', 'Warrior', 'Support', 'Specialist']
-  let lists = {}
-  for (let i = 0; i < heroRoles.length; i++ ) {
-    lists[`topEight${heroRoles[i]}`] = _getTopEightLists(heroObjects, heroRoles[i])
-  }
-  res.render('index', lists)
+  const lists = heroRoles.map(role => {
+    return {
+      heroes: _getTopEightLists(heroObjects, role),
+      role,
+    }
+  })
+  console.log(lists);
+  res.render('index', { lists })
 }
 
 const _getTopEight = (heroObjects) => {

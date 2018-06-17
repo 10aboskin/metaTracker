@@ -1,0 +1,12 @@
+mixin heroList(role, heroes)
+  div.top-eight-all
+    div.center-contents
+      h2= role ? role : 'Heroes'
+    ul
+      each hero in heroes
+        li.hero
+          div.hero-image
+          div.hero-info
+            h4= hero.name
+            p= hero.role
+          div.meta-score.center-contents= hero.metaScore

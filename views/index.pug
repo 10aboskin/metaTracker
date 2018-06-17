@@ -3,65 +3,12 @@ head
     include ../public/stylesheets/index.css
   link(href="https://fonts.googleapis.com/css?family=Open+Sans|Sunflower:300" rel="stylesheet")
 body
-  //- TODO: use for loop to generate lists
+  include _list
   div.page-title.center-contents
     h1 THE TOP 8
   div.lists-grid
-    div.top-eight-all
-      div.center-contents
-        h2 Heroes
-      ul
-        each hero in topEight
-          li.hero
-            div.hero-image
-            div.hero-info
-              h4= hero.name
-              p= hero.role
-            div.meta-score.center-contents= hero.metaScore
-    div.top-eight-assassin
-      div.center-contents
-        h2 Assassins
-      ul
-        each hero in topEightAssassin
-          li.hero
-            div.hero-image
-            div.hero-info
-              h4= hero.name
-              p= hero.role
-            div.meta-score.center-contents= hero.metaScore
-    div.top-eight-warrior
-      div.center-contents
-        h2 Warriors
-      ul
-        each hero in topEightWarrior
-          li.hero
-            div.hero-image
-            div.hero-info
-              h4= hero.name
-              p= hero.role
-            div.meta-score.center-contents= hero.metaScore
-    div.top-eight-support
-      div.center-contents
-        h2 Supports
-      ul
-        each hero in topEightSupport
-          li.hero
-            div.hero-image
-            div.hero-info
-              h4= hero.name
-              p= hero.role
-            div.meta-score.center-contents= hero.metaScore
-    div.top-eight-specialist
-      div.center-contents
-        h2 Specialists
-      ul
-        each hero in topEightSpecialist
-          li.hero
-            div.hero-image
-            div.hero-info
-              h4= hero.name
-              p= hero.role
-            div.meta-score.center-contents= hero.metaScore
+    each list in lists
+      +heroList(list.role, list.heroes)
 
 script
   include ../public/js/index.js
