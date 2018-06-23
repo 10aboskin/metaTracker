@@ -1,64 +1,47 @@
-const rp = require('request-promise')
+const request = require('request-promise')
 const cheerio = require('cheerio')
 const cheerioTableparser = require('cheerio-tableparser')
 
-const heroRoles = require('../helpers/heroRoles')
-
 const requestOptions = {
-  uri: `https://www.hotslogs.com/Default`,
+  method: 'POST',
+  uri: `https://www.hotslogs.com/Sitewide/HeroAndMapStatistics`,
   transform: (body) => cheerio.load(body)
 }
 
-const _getVectorMagnitude = (x, y) => {
-  return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)).toFixed(2)
+const _trimTableData = (tableData) => {
+  const trimmedTable = tableData.map(col => col.slice(3))
+  trimmedTable.pop()
+  trimmedTable.shift()
+  return trimmedTable
 }
 
-const _calculateMetaScores = (popularites, winrates) => {
-  const normalizedPopularites = _normalize(popularites)
-  const normalizedWinrates = _normalize(winrates)
-  let metaScores = []
-  for (let i = 0; i < popularites.length; i++) {
-    metaScores[i] = _getVectorMagnitude(normalizedPopularites[i], normalizedWinrates[i])
-  }
-  return _normalize(metaScores)
-}
-
-const _normalize = (dataSet) => {
-  const max = Math.max(...dataSet)
-  const min = Math.min(...dataSet)
-  return dataSet.map(value => {
-    const newValue = ((value - min) / (max - min)) * 100
-    return Math.floor(newValue)
-  })
-}
-
-const _createHeroObjects = (heroes, popularities, winrates) => {
-  const parsedPopularites = popularities.map(value => parseFloat(value))
-  const parsedWinrates = winrates.map(value => parseFloat(value))
-  const metaScores = _calculateMetaScores(parsedPopularites, parsedWinrates)
-
+const _createHeroObjects = (stats) => {
+  const [heroes, gamesPlayed, gamesBanned, popularities, winrates, deltas, roles, subRoles] = stats
   let heroObjects = []
   for (let i = 0; i < heroes.length; i++) {
-    const name = heroes[i]
-    const role = heroRoles[name.toUpperCase()]
-    const popularity = parsedPopularites[i]
-    const winrate = parsedWinrates[i]
-    const metaScore = metaScores[i]
-    heroObjects[i] = { name, popularity, winrate, metaScore, role }
+    heroObjects[i] = {
+      name: heroes[i],
+      gamesPlayed: parseInt(gamesPlayed[i]),
+      gamesBanned: parseInt(gamesBanned[i]),
+      popularity: parseFloat(popularities[i]),
+      winrate: parseFloat(winrates[i]),
+      delta: parseFloat(deltas[i]),
+      role: roles[i],
+      subRole: subRoles[i]
+    }
   }
   return heroObjects
 }
 
 const getData = (req, res, next) => {
-  rp(requestOptions)
+  request(requestOptions)
     .then($ => {
       // get data from table
       cheerioTableparser($)
-      const [, heroes,,, popularities, winrates,] = $('table')
-        .parsetable(true, true, true)
-        .map(col => col.slice(2))
+      const tableData = $('table').parsetable(true, true, true)
+      const stats = _trimTableData(tableData)
       // attach hero objects to request
-      req.heroObjects = _createHeroObjects(heroes, popularities, winrates)
+      req.heroObjects = _createHeroObjects(stats)
       next()
     })
     .catch((err) => {
