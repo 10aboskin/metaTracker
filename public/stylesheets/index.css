@@ -70,6 +70,7 @@ li {
   margin: auto 8px;
 }
 .hero-info div {
+  display: inline-block;
   font-family: 'Open Sans';
   color: var(--text-dark);
 }
