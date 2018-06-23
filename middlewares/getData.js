@@ -20,14 +20,15 @@ const _calculateMetaScores = (popularites, winrates) => {
   for (let i = 0; i < popularites.length; i++) {
     metaScores[i] = _getVectorMagnitude(normalizedPopularites[i], normalizedWinrates[i])
   }
-  return metaScores
+  return _normalize(metaScores)
 }
 
 const _normalize = (dataSet) => {
   const max = Math.max(...dataSet)
   const min = Math.min(...dataSet)
   return dataSet.map(value => {
-    return (value - min) / (max - min)
+    const newValue = ((value - min) / (max - min)) * 100
+    return Math.floor(newValue)
   })
 }
 
@@ -43,7 +44,7 @@ const _createHeroObjects = (heroes, popularities, winrates) => {
     const popularity = parsedPopularites[i]
     const winrate = parsedWinrates[i]
     const metaScore = metaScores[i]
-    heroObjects[i] = { name, metaScore, role }
+    heroObjects[i] = { name, popularity, winrate, metaScore, role }
   }
   return heroObjects
 }

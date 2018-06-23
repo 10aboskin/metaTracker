@@ -7,7 +7,8 @@ const renderLists = (req, res) => {
       role,
     }
   })
-  console.log(lists);
+  const theTopEight = lists[0].heroes.map(hero => hero.name).slice(0,8)
+  console.log(theTopEight);
   res.render('index', { lists })
 }
 
